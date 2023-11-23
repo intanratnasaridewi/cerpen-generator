@@ -1,47 +1,84 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+  <div class="container">
+    <div class="box" id="box1">
+      <h2>Input Text</h2>
+      <textarea v-model="inputText" placeholder="Masukkan Teks"></textarea>
+      <button @click="generateText">Generate</button>
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <div class="box" id="box2">
+      <h2>Hasil Teks</h2>
+      <p>{{ processedText }}</p>
+    </div>
+  </div>
 </template>
 
+<script setup>
+import { ref, watch } from 'vue';
+
+const inputText = ref('');
+const processedText = ref('');
+
+watch(inputText, (newVal) => {
+  processedText.value = processText(newVal);
+});
+
+function processText(text) {
+  return text.split('').reverse().join('');
+}
+
+function generateText() {
+  processedText.value = processText(inputText.value);
+}
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
+.container {
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.box {
+  flex: 2;
+  padding: 30px;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+button {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+button:hover {
+  background-color: #45a049;
+}
+
+h2 {
+  color: #333;
+}
+
+p {
+  color: #666;
 }
 </style>

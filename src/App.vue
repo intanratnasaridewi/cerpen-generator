@@ -27,9 +27,6 @@
       <div class="form-group">
         <textarea class="form-control" v-model="outputText" disabled placeholder="OutputText">{{ processedText }}</textarea>
       </div>
-      <div class="form-group py-2">
-        <button @click="Copy" class="btn btn-primary">Copy</button>
-      </div>
     </div>
   </div>
 </template>
@@ -58,7 +55,7 @@ function generateText() {
 .container {
   display: flex;
   justify-content: center;
-  max-width: 100%;
+  max-width: 50%;
   margin: 0 auto;
 }
 
@@ -74,7 +71,7 @@ textarea {
 }
 
 button {
-  width: 100%;
+  width: 10%;
   padding: 10px;
   box-sizing: border-box;
   background-color: #4caf50;
